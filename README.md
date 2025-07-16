@@ -129,7 +129,7 @@ All work presented in this dashboard:
 * Aligns with ethical guidelines for fairness, traceability, and explainability.
 
 🧾 **Ethical Declaration Screenshot/Document**:
-[![Ethics Proof](https://your-link-here/ethics.png)](https://your-link-here/ethics.png)
+[![Ethics Proof](3.png)](3.png)
 
 ---
 
@@ -178,10 +178,8 @@ All work presented in this dashboard:
 
 ## 🙌 Credits
 
-Created by: **\[Your Name]**
+Created by: **\[Muhammad Haseeb Arshad]**
 Date: **\[July 2025]**
 License: MIT / Personal Use / Educational Purposes *(modify as applicable)*
 
 ---
-
-Let me know if you'd like a **readme version** or a **PDF version** for portfolio sharing.
