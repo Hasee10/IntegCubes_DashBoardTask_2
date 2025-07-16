@@ -1,0 +1,143 @@
+Shipment Dashboard
+1. Power Query Transformations
+Remove unnecessary columns.
+
+Create a new column: Delivery Status Group:
+
+"Successful" → Delivered
+
+"In Progress" → Dispatched or In Transit
+
+"Failed" → Returned or Pending
+
+Create a Delivery Month column (format: YYYY-MM).
+
+Merge:
+
+Shipments with Products to get Weight & Category
+
+Shipments with Customers to get City & Region
+
+Shipments with Shippers for shipper names
+
+2. Data Modeling
+Create proper 1:M relationships:
+
+Shipments → Products
+
+Shipments → Customers
+
+Shipments → Warehouses
+
+Shipments → Shippers
+
+Create a Calendar table and link it to Shipments[Date].
+
+3. Calculated Columns
+In Shipments:
+
+Total Weight = Weight × Quantity
+
+Cost per Item = ShippingCost ÷ Quantity
+
+In Warehouses:
+
+Capacity Utilized % = Sum of shipment weight stored / warehouse capacity
+
+4. DAX Measures
+Total Shipments
+
+Avg Shipping Cost
+
+Total Weight Shipped
+
+On-time Delivery % = (Delivered Shipments ÷ Total Shipments)
+
+Returned Rate % = (Returned Shipments ÷ Total Shipments)
+
+Shipment Trend (YTD, MTD, QTD)
+
+YoY shipment volume
+
+5. Visualizations
+KPI Cards: Total Shipments, Avg Shipping Cost, Total Weight, Returned %
+
+Line Chart: Shipments by Month
+
+Bar Chart: Shipments by Region or Category
+
+Donut: Status Distribution
+
+Matrix: Warehouse vs Product Category vs Weight
+
+Slicers: Shipper, Month, Status, Category
+
+6. Advanced UX Features
+Tooltip Page:
+
+On hover over shipment → show status, quantity, cost, customer
+
+Drillthrough Page:
+
+On customer → show all their shipments and delivery trends
+
+Bookmarks:
+
+View by Category / View by Region
+
+Filter reset button
+
+
+
+
+-- basic data transformation techniques
+✅ 1. Rename Columns (Optional but Helpful)
+Make names user-friendly. E.g., ProductID → Product ID, CustomerName → Customer Name.
+
+✅ 2. Remove Unnecessary Columns
+If you won’t be using fields like ContactNumber or Weight, remove them to improve performance.
+
+✅ 3. Set Data Types
+Make sure each column has the appropriate data type:
+
+Dates → Date
+
+IDs → Whole Number or Text (depending on format)
+
+Quantity, ShippingCost → Decimal Number
+
+Names/Locations → Text
+
+Status → Text or Categorical
+
+✅ 4. Remove Duplicates in Lookup Tables
+Ensure Customers, Products, Shippers, and Warehouses don’t have duplicate rows by key (e.g., CustomerID).
+
+✅ 5. Trim and Clean Text Columns
+Use Transform → Format → Trim and Clean on all text columns (like CustomerName, ProductName, etc.) to remove hidden characters and spaces.
+
+✅ 6. Create Relationships (Post Power Query in Model View)
+Once queries are loaded:
+
+Link Shipments[CustomerID] → Customers[CustomerID]
+
+Link Shipments[ProductID] → Products[ProductID]
+
+Link Shipments[ShipperID] → Shippers[ShipperID]
+
+Link Shipments[WarehouseID] → Warehouses[WarehouseID]
+
+✅ 7. Add Index Columns if Needed
+For tracking or sorting (e.g., in Shipments), add an Index column via Power Query.
+
+✅ 8. Filter Out Blank or Invalid Data
+In each table, especially Shipments, filter out rows where key fields like CustomerID, ProductID, or ShipmentID are null.
+
+✅ 9. Merge Queries (Optional)
+For easier analysis, you might:
+
+Merge Shipments with Products to get ProductName inline.
+
+Merge Shipments with Customers to get CustomerName and Region.
+
+Keep both separate and merged queries depending on reporting needs.
